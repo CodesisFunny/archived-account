@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archived Account</title>
+  <style>
+    :root {
+      /* ===== CONFIG ===== */
+      --overlay-color: rgba(255,255,255,0.2);
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 3s ease;
+    }
+
+    .bg.active {
+      opacity: 1;
+    }
+
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: var(--overlay-color);
+      z-index: 1;
+    }
+
+    .card {
+      position: relative;
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      max-width: 500px;
+      border: 1px solid #e2e8f0;
+      z-index: 2;
+      color: #0f172a;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      font-size: 28px;
+    }
+
+    p {
+      margin: 10px 0;
+      color: #475569;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background layers -->
+  <div class="bg" id="bg1"></div>
+  <div class="bg" id="bg2"></div>
+
+  <div class="overlay"></div>
+
+  <div class="card">
+    <h1>🚫 @tm.7z Account No Longer Active 🚫</h1>
+    <p>This account is no longer in use.</p>
+    <p>If you want to contact me, here is my new username: @tm.zy.</p>
+    <p style="margin-top:20px; font-size:12px;">Thanks for understanding.</p>
+    <p style="margin-top:20px; font-size:12px;">(btw you can use this source code for your project!)</p>
+  </div>
+
+  <script>
+    /* ===== CONFIG ===== */
+    const images = [
+      'bg1.jpg',
+      'bg2.jpg',
+      'bg3.jpg'
+    ];
+
+    const duration = 8000;
+
+    let index = 0;
+    let current = 0;
+
+    const bg1 = document.getElementById('bg1');
+    const bg2 = document.getElementById('bg2');
+
+    function setBackground(el, img) {
+      el.style.backgroundImage = `url('${img}')`;
+    }
+
+    // initial
+    setBackground(bg1, images[0]);
+    bg1.classList.add('active');
+
+    setInterval(() => {
+      index = (index + 1) % images.length;
+
+      const nextBg = current === 0 ? bg2 : bg1;
+      const currentBg = current === 0 ? bg1 : bg2;
+
+      setBackground(nextBg, images[index]);
+
+      nextBg.classList.add('active');
+      currentBg.classList.remove('active');
+
+      current = current === 0 ? 1 : 0;
+    }, duration);
+  </script>
+
+</body>
+</html>
